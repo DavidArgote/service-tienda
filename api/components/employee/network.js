@@ -28,14 +28,14 @@ function get(req, res, next) {
 function insert(req, res, next) {
   controller.insert(req.body)
     .then((result) => {
-      response.success(req, res, result, 200);
+      response.success(req, res, result, 201);
     }).catch(next);
 }
 
 function update(req, res, next) {
   controller.update(req.body)
     .then((result) => {
-      response.success(req, res, result, 200);
+      response.success(req, res, result, 201);
     }).catch(next);
 }
 

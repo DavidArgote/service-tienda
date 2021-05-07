@@ -26,12 +26,17 @@ module.exports = function(injectedStore) {
     return store.drop(COLLECTION, id);
   }
 
+  function reportStock() {
+    return store.query(COLLECTION, { stock: { $lte: 1 } });
+  }
+
   return {
     insert,
     update,
     get,
     list,
     drop,
+    reportStock,
   }
 
 }

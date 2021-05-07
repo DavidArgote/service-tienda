@@ -9,6 +9,7 @@ router.get('/:id', secure('auth'), get);
 router.delete('/:id', secure('auth'), drop);
 router.post('/', secure('auth'), insert);
 router.put('/', secure('auth'), update);
+router.get('/reports/stock-products', secure('auth'), reportStock);
 
 function list(req, res, next) {
   controller.list()
@@ -40,6 +41,13 @@ function update(req, res, next) {
 
 function drop(req, res, next) {
   controller.drop(req.params.id)
+    .then((data) => {
+      response.success(req, res, data, 200);
+    }).catch(next);
+}
+
+function reportStock(req, res, next) {
+  controller.reportStock(req.params.dateStart, req.params.dateEnd)
     .then((data) => {
       response.success(req, res, data, 200);
     }).catch(next);

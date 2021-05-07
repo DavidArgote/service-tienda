@@ -14,7 +14,7 @@ function connect() {
 }
 
 connect();
-
+  
 function get(nameCollection, id) {
   const collection = connection.collection(nameCollection);
   return new Promise((resolve, reject) => {
@@ -48,6 +48,9 @@ function update(nameCollection, data) {
 }
 
 function insert(nameCollection, data) {
+  if(data.date) {
+    data.date = new Date(data.date);
+  }
   const collection = connection.collection(nameCollection);
   return new Promise((resolve, reject) => {
     collection.insertOne(data, (error, response) => {
@@ -62,7 +65,7 @@ function query(nameCollection, query) {
   return new Promise((resolve, reject) => {
     collection.find(query).toArray((error, docs) => {
       if(error) reject(error);
-      resolve(docs[0]);
+      resolve(docs);
     });
   });
 }
