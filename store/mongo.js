@@ -80,6 +80,16 @@ function drop(nameCollection, id) {
   });
 }
 
+function updateAttribute(nameCollection, id, request) {
+  const collection = connection.collection(nameCollection);
+  return new Promise((resolve, reject) => {
+    collection.updateOne({ _id: ObjectId(id) }, request, (error, result) => {
+      if(error) reject(error);
+      resolve(result);
+    })
+  });
+}
+
 module.exports = {
   insert,
   update,
@@ -87,4 +97,5 @@ module.exports = {
   drop,
   list,
   query,
+  updateAttribute,
 }

@@ -30,14 +30,18 @@ module.exports = function(injectedStore) {
     return store.query(COLLECTION, { stock: { $lte: 1 } });
   }
 
+  function updateStock({ id, value }) {
+    return store.updateAttribute(COLLECTION, id, { $set: { stock: value } });
+  }
+
   return {
     insert,
     update,
     get,
     list,
     drop,
+    updateStock,
     reportStock,
   }
 
 }
-
